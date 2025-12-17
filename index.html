@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHS | Современная одежда</title>
+    <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='https://allgameg87.github.io/AHS/'">
+            <img src="logo-light.png" alt="AHS" class="logo-img" id="logoImage">
+        </div>
+        
+        <div class="nav-links">
+            <a href="https://allgameg87.github.io/AHS-Catalog/" class="nav-link">Каталог</a>
+            <a href="https://allgameg87.github.io/AHS-Skidki/" class="nav-link">Скидки</a>
+        </div>
+        
+        <div class="header-actions">
+            <div class="auth-buttons" id="authButtons"></div>
+            <svg class="cart-icon" viewBox="0 0 24 24" onclick="window.location.href='https://allgameg87.github.io/AHS-Korzina/'">
+                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <div class="menu-icon"></div>
+            </button>
+        </div>
+    </header>
+
+    <nav class="sidebar-menu">
+        <div class="menu-item" onclick="window.location.href='https://allgameg87.github.io/AHS-Izbrannoe/'">Избранное</div>
+        <div class="menu-item" onclick="window.location.href='https://allgameg87.github.io/AHS-Skidki/'">Скидки</div>
+        <div class="menu-item" onclick="window.location.href='https://allgameg87.github.io/AHS-Korzina/'">Корзина</div>
+        <div class="menu-item" onclick="window.location.href='https://allgameg87.github.io/AHS-O-Saite/'">О сайте</div>
+        <div class="menu-item" onclick="window.location.href='https://allgameg87.github.io/AHS-Poddergca/'">Поддержка</div>
+    </nav>
+
+    <!-- Модальные окна -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Вход</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Пароль" required>
+                    <div class="auth-links">
+                        <a class="forgot-password" onclick="showForgotPassword()">Забыли пароль?</a>
+                    </div>
+                </div>
+                <div class="login-actions">
+                    <button type="submit" class="auth-button">Войти</button>
+                    <div class="auth-links">
+                        Нету аккаунта?<br>
+                        <a class="register" onclick="showModal('register')">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginConfirmModal" class="modal">
+        <div class="modal-content">
+            <h2>Подтверждение входа</h2>
+            <p>На вашу почту отправлен код подтверждения</p>
+            <div class="form-group">
+                <input type="text" class="code-input" maxlength="5" required>
+            </div>
+            <button class="auth-button" onclick="confirmLogin()">Подтвердить</button>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h2>Регистрация</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Имя" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="auth-button">Продолжить</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <h2>Подтверждение</h2>
+            <p>На вашу почту отправлен код подтверждения</p>
+            <div class="form-group">
+                <input type="text" class="code-input" maxlength="5" required>
+            </div>
+            <button class="auth-button" onclick="verifyCode()">Подтвердить</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно товара -->
+    <div id="productModal" class="product-modal">
+        <div class="product-modal-content">
+            <button class="product-modal-close" onclick="closeProductModal()">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+            <div class="product-images">
+                <div class="product-image-slider" id="productImageSlider">
+                    <div class="product-image-slide">
+                        <img src="" alt="" id="productImage1">
+                    </div>
+                    <div class="product-image-slide">
+                        <img src="" alt="" id="productImage2">
+                    </div>
+                    <div class="product-image-slide">
+                        <img src="" alt="" id="productImage3">
+                    </div>
+                </div>
+                <div class="product-slider-controls">
+                    <button class="product-slider-btn" onclick="prevProductImage()">
+                        <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                    </button>
+                    <button class="product-slider-btn" onclick="nextProductImage()">
+                        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </button>
+                </div>
+                <div class="product-slider-indicator">
+                    <div class="product-slider-dot" onclick="goToProductImage(0)"></div>
+                    <div class="product-slider-dot" onclick="goToProductImage(1)"></div>
+                    <div class="product-slider-dot" onclick="goToProductImage(2)"></div>
+                </div>
+            </div>
+            <div class="product-info">
+                <h2 class="product-info-title" id="productModalTitle"></h2>
+                <div class="product-info-price" id="productModalPrice"></div>
+                <div class="product-info-description" id="productModalDescription"></div>
+                <div class="product-info-features">
+                    <div class="product-info-feature">
+                        <div class="product-info-feature-title">Материал:</div>
+                        <div class="product-info-feature-value" id="productModalMaterial"></div>
+                    </div>
+                    <div class="product-info-feature">
+                        <div class="product-info-feature-title">Размеры:</div>
+                        <div class="product-info-feature-value" id="productModalSizes"></div>
+                    </div>
+                    <div class="product-info-feature">
+                        <div class="product-info-feature-title">Цвета:</div>
+                        <div class="product-info-feature-value" id="productModalColors"></div>
+                    </div>
+                    <div class="product-info-feature">
+                        <div class="product-info-feature-title">Страна:</div>
+                        <div class="product-info-feature-value" id="productModalCountry"></div>
+                    </div>
+                </div>
+                <button class="product-modal-add-to-cart" onclick="addToCartFromModal()">В корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Слайдер -->
+    <div class="slider-container">
+        <div class="slides-track">
+            <div class="slide active" onclick="redirectToCatalog(event)">
+                <img src="banner1.jpg" alt="Новая коллекция">
+            </div>
+            <div class="slide" onclick="redirectToCatalog(event)">
+                <img src="banner2.jpg" alt="Специальные предложения">
+            </div>
+            <div class="slide" onclick="redirectToCatalog(event)">
+                <img src="banner3.jpg" alt="Летняя распродажа">
+            </div>
+            <div class="slide" onclick="redirectToCatalog(event)">
+                <img src="banner4.jpg" alt="Осенние тренды">
+            </div>
+            <div class="slide" onclick="redirectToCatalog(event)">
+                <img src="banner5.jpg" alt="Зимняя коллекция">
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="slider-btn prev" onclick="prevSlide(event)">
+                <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+            </button>
+            <button class="slider-btn next" onclick="nextSlide(event)">
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </button>
+        </div>
+        <div class="progress-dots"></div>
+    </div>
+
+    <main class="main-content">
+        <h2 class="main-title">Добро пожаловать в AHS</h2>
+        <div class="welcome-text">
+            <p>Откройте для себя мир современной моды с AHS - брендом, который переосмысливает стиль и комфорт. Наши коллекции созданы для тех, кто ценит качество, инновационные материалы и лаконичный дизайн. Каждая деталь продумана до мелочей, чтобы подчеркнуть вашу индивидуальность.</p>
+            <p>Мы предлагаем не просто одежду, а стиль жизни - сочетание функциональности, эстетики и современных технологий. Наши модели разрабатываются с учетом последних трендов, оставаясь при этом вне времени. Исследуйте новые грани своего стиля вместе с AHS.</p>
+        </div>
+
+        <div class="featured-products">
+            <h3 class="featured-title">Рекомендуемые товары</h3>
+            <div class="product-grid">
+                <div class="product-card" onclick="openProductModal('Футболка Basic', '₽4399', 'Классическая футболка из 100% хлопка. Идеальная основа для любого образа.', 'Хлопок 100%', 'XS, S, M, L, XL', 'Белый, Черный, Серый', 'Россия', 'product1.jpg', 'product1-2.jpg', 'product1-3.jpg')">
+                    <div class="product-image-container">
+                        <img src="product1.jpg" alt="Футболка Basic" class="product-image">
+                        <button class="favorite-heart" onclick="toggleFavorite(event, 'product1')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Футболка Basic</h3>
+                        <p class="product-price">₽4399</p>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); showModal('login')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal('Джинсы Slim Fit', '₽7499', 'Стильные джинсы с зауженным кроем. 98% хлопок, 2% эластан.', 'Хлопок 98%, Эластан 2%', '28-38', 'Синий, Черный', 'Турция', 'product2.jpg', 'product2-2.jpg', 'product2-3.jpg')">
+                    <div class="product-image-container">
+                        <img src="product2.jpg" alt="Джинсы Slim Fit" class="product-image">
+                        <button class="favorite-heart" onclick="toggleFavorite(event, 'product2')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Джинсы Slim Fit</h3>
+                        <p class="product-price">₽7499</p>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); showModal('login')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProductModal('Платье летнее', '₽8999', 'Легкое летнее платье из вискозы с цветочным принтом.', 'Вискоза 100%', 'XS, S, M, L', 'Голубой, Розовый, Белый', 'Россия', 'product4.jpg', 'product4-2.jpg', 'product4-3.jpg')">
+                    <div class="product-image-container">
+                        <img src="product4.jpg" alt="Платье летнее" class="product-image">
+                        <button class="favorite-heart" onclick="toggleFavorite(event, 'product4')">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Платье летнее</h3>
+                        <p class="product-price">₽8999</p>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); showModal('login')">В корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 AHS. Все права защищены.</p>
+        <p class="creator-signature" tabindex="0">Сделал Чиркин Е.А.</p>
+    </footer>
+
+    <button class="theme-switcher">🌓</button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+
